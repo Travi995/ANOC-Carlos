@@ -2,6 +2,8 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './user/user.module';
+import { UserEntity } from './user/entities/user.entity';
 
 
 @Module({
@@ -14,10 +16,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
-      entities:[],
+      entities:[UserEntity],
       synchronize: true,
       // logging: true,
-    })
+    }),
+    UserModule,
+    
   ],
   controllers: [],
   providers: [],

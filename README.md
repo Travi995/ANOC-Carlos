@@ -17,3 +17,7 @@ docker-compose up -d    # :contentReference[oaicite:1]{index=1}
 
 # Ejecuta la aplicación NestJS en modo desarrollo
 npm run start:dev  
+
+
+#documentacion de la api 
+# URL: http://localhost:3000/api/docs
