@@ -90,8 +90,6 @@ export class UserService {
 			throw new BadRequestException('User not found')
 		}
 		await this.userRepository.update(item.id,updateUserDto)
-		
-
 		return {msg:'User updated successfully'}
 	}
 
