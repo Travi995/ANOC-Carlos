@@ -6,6 +6,7 @@ import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { RolesEnum } from './enum/rol.enum';
 import * as bcrypt from 'bcrypt'
+import { statusEnum } from './enum/status.enum';
 
 @Injectable()
 export class UserService {
@@ -107,7 +108,10 @@ export class UserService {
 
 	async remove(id: string) {
 		try{
-			await this.userRepository.delete(id);
+			const item =await this.userRepository.findOneBy({id});
+
+			if(item)this.userRepository.update(item?.id,{...item,['status']:statusEnum.DELETED})
+
 		}catch (error){
 			console.log(error)
 		}

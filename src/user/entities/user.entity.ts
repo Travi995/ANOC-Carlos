@@ -1,5 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { RolesEnum } from "../enum/rol.enum";
+import { statusEnum } from "../enum/status.enum";
+
+
 
 @Entity('user')
 export class UserEntity {
@@ -15,4 +18,8 @@ export class UserEntity {
 
     @Column('text', {select:false,})
     password:string
+
+    @Column('enum',{enum:statusEnum,default:statusEnum.ACTIVE})
+    status:statusEnum
+
 }

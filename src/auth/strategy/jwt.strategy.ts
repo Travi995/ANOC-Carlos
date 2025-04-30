@@ -7,6 +7,7 @@ import { JwtPayload } from "../interfaces/jwt.interface";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
+import { statusEnum } from "src/user/enum/status.enum";
 
 
 @Injectable()
@@ -27,10 +28,10 @@ export class JWTStrategy extends PassportStrategy(Strategy) {
         const {id} = payload
         const user = await this.userRepository.findOneBy({id})
 
-        if(!user){
-            throw new UnauthorizedException('token Invalid')
-
+        if(user && user.status === statusEnum.ACTIVE ){
+            return user
+            
         }
-        return user
+        throw new UnauthorizedException('token Invalid')
     }
 }
