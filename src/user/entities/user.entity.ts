@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { RolesEnum } from "../enum/rol.enum";
 import { statusEnum } from "../enum/status.enum";
+import { AsociateEntity } from "src/asociate/entities/asociate.entity";
 
 
 
@@ -21,5 +22,8 @@ export class UserEntity {
 
     @Column('enum',{enum:statusEnum,default:statusEnum.ACTIVE})
     status:statusEnum
+
+    @OneToOne(()=>AsociateEntity,asociate=>asociate.user)
+    asociate:AsociateEntity
 
 }
