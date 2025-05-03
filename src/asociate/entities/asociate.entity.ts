@@ -1,5 +1,6 @@
+import { BirdEntity } from "src/bird/entities/bird.entity";
 import { UserEntity } from "src/user/entities/user.entity";
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('asociate')
 export class AsociateEntity {
@@ -22,5 +23,8 @@ export class AsociateEntity {
     @OneToOne(()=>UserEntity,user=>user.asociate,{cascade:true})
     @JoinColumn({name:'user_id',referencedColumnName:'id'})
     user:UserEntity
+
+    @OneToMany(()=>BirdEntity,bird=>bird.asociate)
+    birds:BirdEntity[]
 
 }
