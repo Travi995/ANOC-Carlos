@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { UserEntity } from './user/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { AsociateModule } from './asociate/asociate.module';
+import { AsociateEntity } from './asociate/entities/asociate.entity';
 
 
 @Module({
@@ -17,7 +18,7 @@ import { AsociateModule } from './asociate/asociate.module';
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
-      entities:[UserEntity],
+      entities:[UserEntity,AsociateEntity],
       synchronize: true,
       // logging: true,
     }),

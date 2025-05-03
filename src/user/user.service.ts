@@ -41,7 +41,8 @@ export class UserService {
 		}
 
 		return {
-			msg:'User created successfully'
+			msg:'User created successfully',
+			data:item
 		}
   }
 
@@ -51,6 +52,7 @@ export class UserService {
 		}
 		throw new BadRequestException(error.message);
 	}
+	
 	async findAll() {
 		const items =  await this.userRepository.find();
 		if(!items.length){

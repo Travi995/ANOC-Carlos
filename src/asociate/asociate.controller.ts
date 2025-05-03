@@ -19,16 +19,16 @@ export class AsociateController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.asociateService.findOne(+id);
+    return this.asociateService.findOneById(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateAsociateDto: UpdateAsociateDto) {
-    return this.asociateService.update(+id, updateAsociateDto);
+    return this.asociateService.update(id, updateAsociateDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.asociateService.remove(+id);
+    return this.asociateService.remove(id);
   }
 }
