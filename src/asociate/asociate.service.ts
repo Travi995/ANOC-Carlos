@@ -33,7 +33,9 @@ export class AsociateService {
 	}
 
 	async findAll() {
-		const data = await this.asociateRepository.find()
+		const data = await this.asociateRepository.find({
+			relations:['user']
+		})
 		if (!data.length) {
 			throw new NotFoundException('No asociates found')
 		}
