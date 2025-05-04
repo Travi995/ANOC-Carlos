@@ -8,7 +8,10 @@ async function bootstrap() {
   
   app.setGlobalPrefix('api/v0');
 
-  app.useGlobalPipes(new ValidationPipe())
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist:true,
+    forbidNonWhitelisted:true
+  }))
   app.enableCors(false);
 
   const config = new DocumentBuilder()
