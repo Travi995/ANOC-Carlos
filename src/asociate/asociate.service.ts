@@ -3,8 +3,9 @@ import { CreateAsociateDto } from './dto/create-asociate.dto';
 import { UpdateAsociateDto } from './dto/update-asociate.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AsociateEntity } from './entities/asociate.entity';
-import { Not, Repository } from 'typeorm';
+import {  Repository } from 'typeorm';
 import { UserService } from 'src/user/user.service';
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class AsociateService {
@@ -23,7 +24,12 @@ export class AsociateService {
 			email,
 			password
 		})
-		const item = this.asociateRepository.create({ ...asociateData, user: user.data });
+		const item = this.asociateRepository.create({
+			 ...asociateData, 
+			 user: {
+				email,
+				password:bcrypt.hashSync(createAsociateDto.password,10)
+			} });
 		await this.asociateRepository.save(item);
 
 		return {

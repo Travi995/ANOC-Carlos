@@ -4,9 +4,9 @@ import { UpdateRolDto, UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
-import { RolesEnum } from './enum/rol.enum';
 import * as bcrypt from 'bcrypt'
 import { statusEnum } from './enum/status.enum';
+import { ValidRoles } from 'src/auth/decorator/roleprotected.decorator';
 
 @Injectable()
 export class UserService {
@@ -30,7 +30,7 @@ export class UserService {
 		}else{
 			item = this.userRepository.create({
 				...createUserDto,
-				rol:RolesEnum.ADMIN
+				rol:ValidRoles.ADMIN
 			})
 		}
 

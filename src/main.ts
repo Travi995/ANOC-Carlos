@@ -10,11 +10,15 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe())
   app.enableCors(false);
+  // verificar error del cors porke cuando decido obtener get users
+
 
   const config = new DocumentBuilder()
     .setTitle('Chanoi Api')
     .setDescription('API Description')
     .setVersion('0.1')
+    .addApiKey({ type: 'apiKey', in: 'header', name: 'token', description: 'Token de autenticación' },'token')
+    .addSecurityRequirements('token')
     .build();
   
   const document = SwaggerModule.createDocument(app, config);

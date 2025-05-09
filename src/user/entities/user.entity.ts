@@ -1,7 +1,7 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { RolesEnum } from "../enum/rol.enum";
 import { statusEnum } from "../enum/status.enum";
 import { AsociateEntity } from "src/asociate/entities/asociate.entity";
+import { ValidRoles } from "src/auth/decorator/roleprotected.decorator";
 
 
 
@@ -14,8 +14,8 @@ export class UserEntity {
     @Column('text',{unique:true,})
     email:string
 
-    @Column('enum',{enum:RolesEnum,default:RolesEnum.USER})
-    rol:RolesEnum
+    @Column('enum',{enum:ValidRoles,default:ValidRoles.USER})
+    rol:ValidRoles
 
     @Column('text', {select:false,})
     password:string

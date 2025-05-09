@@ -22,6 +22,7 @@ import { BirdEntity } from './bird/entities/bird.entity';
       database: process.env.DB_NAME,
       entities:[UserEntity,AsociateEntity,BirdEntity ],
       synchronize: true,
+      // dropSchema: true,
       // logging: true,
     }),
     AuthModule,

@@ -18,11 +18,13 @@ export class UserRoleGuard implements CanActivate {
   ): boolean | Promise<boolean> | Observable<boolean> {
     
     const validRoles:string[] = this.reflector.get('roles', context.getHandler());
+    console.log(validRoles)
     if(!validRoles) return true
 
     if(validRoles.length === 0) return true
 
     const user:UserEntity =  context.switchToHttp().getRequest().user;
+    console.log(user)
     
     if(!user) throw new BadRequestException('No user found')
 

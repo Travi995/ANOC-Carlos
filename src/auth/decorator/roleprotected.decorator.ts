@@ -2,7 +2,8 @@ import { SetMetadata } from '@nestjs/common';
 
 export enum ValidRoles{
     ADMIN = 'ADMIN',
-    USER = 'USER'
+    USER = 'USER',
+    ASOCIATE= 'ASOCIATE'
 }
 
 
