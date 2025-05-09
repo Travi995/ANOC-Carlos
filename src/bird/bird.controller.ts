@@ -2,7 +2,11 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe } from
 import { BirdService } from './bird.service';
 import { CreateBirdDto } from './dto/create-bird.dto';
 import { UpdateBirdDto } from './dto/update-bird.dto';
+import { AuthRole } from 'src/auth/decorator/authRole.decorator';
+import { ValidRoles } from 'src/auth/decorator/roleprotected.decorator';
 
+
+@AuthRole(ValidRoles.ADMIN,ValidRoles.ASOCIATE)
 @Controller('bird')
 export class BirdController {
   constructor(private readonly birdService: BirdService) {}
@@ -10,7 +14,7 @@ export class BirdController {
   @Post()
   create(@Body() createBirdDto: CreateBirdDto) {
     return this.birdService.create(createBirdDto);
-    
+
   }
 
   @Get()
