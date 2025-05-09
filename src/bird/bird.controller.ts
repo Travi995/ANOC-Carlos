@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe } from '@nestjs/common';
 import { BirdService } from './bird.service';
 import { CreateBirdDto } from './dto/create-bird.dto';
 import { UpdateBirdDto } from './dto/update-bird.dto';
@@ -10,6 +10,7 @@ export class BirdController {
   @Post()
   create(@Body() createBirdDto: CreateBirdDto) {
     return this.birdService.create(createBirdDto);
+    
   }
 
   @Get()
@@ -18,17 +19,17 @@ export class BirdController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id',ParseUUIDPipe) id: string) {
     return this.birdService.findOneById(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBirdDto: UpdateBirdDto) {
+  update(@Param('id',ParseUUIDPipe) id: string, @Body() updateBirdDto: UpdateBirdDto) {
     return this.birdService.update(id, updateBirdDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id',ParseUUIDPipe) id: string) {
     return this.birdService.remove(id);
   }
 }

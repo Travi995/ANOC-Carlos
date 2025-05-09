@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateBirdDto } from './dto/create-bird.dto';
 import { UpdateBirdDto } from './dto/update-bird.dto';
 import { BirdEntity } from './entities/bird.entity';
@@ -33,12 +33,19 @@ export class BirdService {
 
 	async findOneById(id: string) {
 		const item = await this.birdRepository.findOneBy({ id })
+		if(!item) throw new NotFoundException(`not exist bird by  id: ${id}`)
 
 		return item
 	}
 
 	async update(id: string, updateBirdDto: UpdateBirdDto) {
-		this.birdRepository.update(id, {...updateBirdDto});
+		try {
+			this.birdRepository.update(id, {...updateBirdDto});
+			
+		} catch (error) {
+			console.log(error)
+			throw new InternalServerErrorException('please contact the support')
+		}
 
 		return {
 			msg: 'Bird updated successfully',
@@ -47,7 +54,6 @@ export class BirdService {
 
 	remove(id: string) {
 		this.birdRepository.update(id, {status:statusEnum.DELETED});
-		//  averiguar si el pajaro se puede borrar por completo o se marca con un status de eliminado
 		return {
 			msg: 'Bird deleted successfully',
 		}
