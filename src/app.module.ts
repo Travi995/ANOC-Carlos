@@ -8,6 +8,8 @@ import { AsociateModule } from './asociate/asociate.module';
 import { AsociateEntity } from './asociate/entities/asociate.entity';
 import { BirdModule } from './bird/bird.module';
 import { BirdEntity } from './bird/entities/bird.entity';
+import { LocalsModule } from './locals/locals.module';
+import { LocalEntity } from './locals/entities/local.entity';
 
 
 @Module({
@@ -20,7 +22,7 @@ import { BirdEntity } from './bird/entities/bird.entity';
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
-      entities:[UserEntity,AsociateEntity,BirdEntity ],
+      entities:[UserEntity,AsociateEntity,BirdEntity,LocalEntity ],
       synchronize: true,
       // dropSchema: true,
       // logging: true,
@@ -29,6 +31,7 @@ import { BirdEntity } from './bird/entities/bird.entity';
     UserModule,
     AsociateModule,
     BirdModule,
+    LocalsModule,
     
   ],
   controllers: [],

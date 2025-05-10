@@ -1,4 +1,5 @@
 import { AsociateEntity } from "src/asociate/entities/asociate.entity";
+import { LocalEntity } from "src/locals/entities/local.entity";
 import { statusEnum } from "src/user/enum/status.enum";
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
@@ -41,4 +42,7 @@ export class BirdEntity {
 
     @ManyToOne(()=>AsociateEntity,asociate=>asociate.birds)
     asociate:AsociateEntity
+
+    @ManyToOne(()=>LocalEntity,local=>local.bird)
+    local:LocalEntity
 }
