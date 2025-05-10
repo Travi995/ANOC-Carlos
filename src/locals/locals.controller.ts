@@ -4,8 +4,11 @@ import { CreateLocalDto } from './dto/create-local.dto';
 import { UpdateLocalDto } from './dto/update-local.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { AddBirdDto } from './dto/add-bird,dto';
+import { ValidRoles } from 'src/auth/decorator/roleprotected.decorator';
+import { AuthRole } from 'src/auth/decorator/authRole.decorator';
 
 @ApiTags("local")
+@AuthRole(ValidRoles.ADMIN,ValidRoles.USER)
 @Controller('locals')
 export class LocalsController {
   constructor(private readonly localsService: LocalsService) {}
