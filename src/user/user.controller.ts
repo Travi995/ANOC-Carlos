@@ -2,7 +2,11 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateRolDto, UpdateUserDto } from './dto/update-user.dto';
+import { AuthRole } from 'src/auth/decorator/authRole.decorator';
 
+import { ValidRoles } from 'src/auth/decorator/roleprotected.decorator';
+
+@AuthRole(ValidRoles.ADMIN)
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}

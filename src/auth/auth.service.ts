@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotAcceptableException } from '@nestjs/common';
 import { CreateAuthDto } from './dto/register.dto';
 import { LoginAuthDTO } from './dto/login.dto';
 import { Repository } from 'typeorm';
@@ -23,7 +23,7 @@ export class AuthService {
 
 		const amountUsers = await this.userRepository.count();
 		if (amountUsers) {
-			throw new BadRequestException('Please Contact width Admin our Support');
+			throw new NotAcceptableException('Please Contact width Admin our Support');
 		} 
 		return this.userService.create(createAuthDto)
 	}

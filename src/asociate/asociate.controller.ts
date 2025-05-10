@@ -1,8 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
 import { AsociateService } from './asociate.service';
 import { CreateAsociateDto } from './dto/create-asociate.dto';
 import { UpdateAsociateDto } from './dto/update-asociate.dto';
+import {  ValidRoles } from 'src/auth/decorator/roleprotected.decorator';
+import { AuthRole } from 'src/auth/decorator/authRole.decorator';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Asociate')
+@AuthRole(ValidRoles.ADMIN)
 @Controller('asociate')
 export class AsociateController {
   constructor(private readonly asociateService: AsociateService) {}
@@ -18,6 +23,7 @@ export class AsociateController {
   }
 
   @Get(':id')
+  @AuthRole(ValidRoles.ADMIN)
   findOne(@Param('id') id: string) {
     return this.asociateService.findOneById(id);
   }
