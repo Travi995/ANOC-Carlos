@@ -9,5 +9,6 @@ import { BirdEntity } from './entities/bird.entity';
   imports:[TypeOrmModule.forFeature([BirdEntity])],
   controllers: [BirdController],
   providers: [BirdService],
+  exports:[BirdService]
 })
 export class BirdModule {}

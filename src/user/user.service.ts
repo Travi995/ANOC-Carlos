@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateRolDto, UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
-import { Repository } from 'typeorm';
+import { BeforeUpdate, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt'
 import { statusEnum } from './enum/status.enum';
 import { ValidRoles } from 'src/auth/decorator/roleprotected.decorator';
@@ -15,10 +15,7 @@ export class UserService {
 		private readonly userRepository: Repository<UserEntity>,
 	) { }
 
-	
-
 	async create(createUserDto: CreateUserDto) {
-
 		const amountUsers = await this.userRepository.count();
 		createUserDto.password = bcrypt.hashSync(createUserDto.password,10);
 		let item:UserEntity
@@ -100,6 +97,7 @@ export class UserService {
 		if(!item){
 			throw new BadRequestException('User not found')
 		}
+
 		item.rol = updateRolDto.rol
 		await this.userRepository.save(item)
 		return {msg:'User role updated successfully'}
