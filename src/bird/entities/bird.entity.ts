@@ -29,6 +29,13 @@ export class BirdEntity {
     @Column('enum',{enum:statusEnum,default:statusEnum.ACTIVE})
     status:statusEnum
 
+    
+    @Column('boolean',{default:false})
+    readySell:boolean
+    
+    @Column('boolean',{default:false})
+    sell:boolean
+    
     @CreateDateColumn()
     createdAt:Date
 
