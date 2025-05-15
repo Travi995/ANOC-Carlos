@@ -12,7 +12,7 @@ async function bootstrap() {
     whitelist:true,
     forbidNonWhitelisted:true
   }))
-  app.enableCors(false);
+  app.enableCors({origin:true});
   // verificar error del cors porke cuando decido obtener get users
 
 

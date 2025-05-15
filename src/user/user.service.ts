@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateRolDto, UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
-import { BeforeUpdate, Repository } from 'typeorm';
+import {  Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt'
 import { statusEnum } from './enum/status.enum';
 import { ValidRoles } from 'src/auth/decorator/roleprotected.decorator';

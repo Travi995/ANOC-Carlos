@@ -1,4 +1,4 @@
-import { BadRequestException, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {  ConflictException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAsociateDto } from './dto/create-asociate.dto';
 import { UpdateAsociateDto } from './dto/update-asociate.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -6,12 +6,15 @@ import { AsociateEntity } from './entities/asociate.entity';
 import {  Repository } from 'typeorm';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt'
+import { UserEntity } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class AsociateService {
 	constructor(
 		@InjectRepository(AsociateEntity)
 		private readonly asociateRepository: Repository<AsociateEntity>,
+		@InjectRepository(UserEntity)
+		private readonly userRepository: Repository<UserEntity>,
 
 		private readonly userService: UserService
 
@@ -20,6 +23,10 @@ export class AsociateService {
 	async create(createAsociateDto: CreateAsociateDto) {
 		const { email, password, ...asociateData } = createAsociateDto
 
+		const data =  await this.userRepository.findOneBy({email})
+		if(data){
+			throw new ConflictException('Email already exists')
+		}
 		const user = await this.userService.create({
 			email,
 			password
