@@ -23,14 +23,7 @@ export class AsociateService {
 	async create(createAsociateDto: CreateAsociateDto) {
 		const { email, password, ...asociateData } = createAsociateDto
 
-		const data =  await this.userRepository.findOneBy({email})
-		if(data){
-			throw new ConflictException('Email already exists')
-		}
-		const user = await this.userService.create({
-			email,
-			password
-		})
+		
 		const item = this.asociateRepository.create({
 			 ...asociateData, 
 			 user: {
