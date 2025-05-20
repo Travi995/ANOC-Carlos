@@ -20,10 +20,7 @@ export class AsociateService {
 	async create(createAsociateDto: CreateAsociateDto) {
 		const { email, password, ...asociateData } = createAsociateDto
 
-		const user = await this.userService.create({
-			email,
-			password
-		})
+		
 		const item = this.asociateRepository.create({
 			 ...asociateData, 
 			 user: {
