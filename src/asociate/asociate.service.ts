@@ -7,6 +7,7 @@ import {  Repository } from 'typeorm';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt'
 import { UserEntity } from 'src/user/entities/user.entity';
+import { Roleprotected, ValidRoles } from 'src/auth/decorator/roleprotected.decorator';
 
 @Injectable()
 export class AsociateService {
@@ -28,7 +29,8 @@ export class AsociateService {
 			 ...asociateData, 
 			 user: {
 				email,
-				password:bcrypt.hashSync(createAsociateDto.password,10)
+				password:bcrypt.hashSync(createAsociateDto.password,10),
+				rol:ValidRoles.ASOCIATE
 			} });
 		await this.asociateRepository.save(item);
 
